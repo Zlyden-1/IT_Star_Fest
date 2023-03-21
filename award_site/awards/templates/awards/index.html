@@ -1,0 +1,32 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Главная</title>
+    <meta name="description" content="Figma htmlGenerator">
+    <meta name="author" content="htmlGenerator">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static '/awards/style.css' %}">
+</head>
+<body>
+<div class=e1_2>
+    <div class="e4_4"></div>
+    <div class=e4_30>
+        <div class="e4_6"></div>
+        <div class="e4_7"></div>
+    </div>
+    <div class=e4_44><span class="e4_10">Главная</span><span class="e4_11">Контакты</span>
+        <span class="e4_12">Награды</span></div>
+    {% for row in award_list %}
+    <div class=e4_114>
+        {% for award in row %}
+        <div class=e4_111>
+            <div class="e4_112"></div>
+            <span class="e4_113">{{ award.name }}</span></div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <span class="e4_62">+7(834) 330-22-44</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+from Pop import Pop
+from matplotlib import pyplot as plt
+import pandas as pd
+
+def __main__():
+    population = Pop()
+    counter = 0
+    max = 0
+    max_dynamics = pd.Series(dtype= float)
+    avg_dynamics = pd.Series(dtype= float)
+    max_weights_dynamics = pd.DataFrame(columns= ['Ch1', 'Ch2', 'Ch3', 'Ch4'])
+    print('Доходность активов 1, 2, 3 и 4 соответственно:')
+    print(population.get_e())
+    while counter <= 15:
+        # print("№"+ str(counter))
+        # population.print()
+        max = population.get_max()
+        length = len(max_dynamics)
+        max_dynamics.loc[length] = max
+        avg_dynamics.loc[length] = population.get_avg()
+        max_weights_dynamics.loc[length] = population.get_max_owner_partial()
+        list_of_selected = population.selection()
+        population = Pop(Pop.new_pop(list_of_selected))
+        if max == population.get_max():
+            counter += 1
+        else:
+            max = population.get_max()
+            counter = 0
+        length = len(max_dynamics)
+        max_dynamics.loc[length] = max
+        print(population.get_max_owner_partial())
+        print(population.get_max_owner_dec())
+        print(population.get_max_owner_bin())
+
+    print('Максимальная доходность портфеля - ', max)
+    print('Веса активов 1, 2, 3 и 4 соответственно:')
+    print(population.get_max_owner_partial())
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize= (20, 20))
+    ax1.set_title('Изменение максимальной и средней приспособленности')
+    ax1.set_xlabel('Номер поколения')
+    ax1.set_ylabel('Доходность портфеля')
+    ax1.plot(max_dynamics.index, max_dynamics, label='Изменение максимальной приспособленности')
+    ax1.plot(avg_dynamics.index, avg_dynamics, label='Изменение средней приспособленности')
+    ax1.legend()
+
+    ax2.set_title('Изменение весов, дающих максимальную пригодность')
+    ax2.set_xlabel('Номер поколения')
+    ax2.set_ylabel('Вес актива')
+    ax2.plot(max_weights_dynamics['Ch1'].index, max_weights_dynamics['Ch1'], label='Вес актива 1')
+    ax2.plot(max_weights_dynamics['Ch2'].index, max_weights_dynamics['Ch2'], label='Вес актива 2')
+    ax2.plot(max_weights_dynamics['Ch3'].index, max_weights_dynamics['Ch3'], label='Вес актива 3')
+    ax2.plot(max_weights_dynamics['Ch4'].index, max_weights_dynamics['Ch4'], label='Вес актива 4')
+    ax2.legend()
+
+    plt.show()
+
+
+__main__()
