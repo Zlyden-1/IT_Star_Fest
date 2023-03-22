@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <title>Главная</title>
+    <title>Результаты поиска</title>
     <meta name="description" content="Figma htmlGenerator">
     <meta name="author" content="htmlGenerator">
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
@@ -25,12 +25,13 @@
             <a class="nav-link disabled" href="#">>+7(834) 330-22-44<</a>
         </li>
     </ul>
-    <form action="awards/search" method="GET">
-        <input type="text" name="q" placeholder="Поиск..." required>
-        <button type="submit">Найти</button>
+    <form>
+
     </form>
+    {% if results %}
+    <span>По вашему запросу "{{ query }}" нашлось:</span>
     <div class="row">
-        {% for award in award_list %}
+        {% for award in results %}
         <div class="col-md-3">
             <div class="card"><a href="/awards/{{ award.pk }}">
                 <div class="card-body">
@@ -45,6 +46,9 @@
         {% endif %}
         {% endfor %}
     </div>
+    {% else %}
+    <span>К сожалению, по вашему запросу "{{ query }}" ничего не нашлось.</span>
+    {% endif %}
 </div>
 <script src="{% static '/awards/js/jquery.min.js' %}"></script>
 <script src="{% static '/awards/js/bootstrap.min.js' %}"></script>
