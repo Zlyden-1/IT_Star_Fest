@@ -41,8 +41,6 @@ class AwardVew(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['linked_awards'] = Award.objects.filter(name=context['award'].name).exclude(pk=context['award'].pk)
-        for i, j in context.items():
-            print(f'"{i}" : {j}')
         return context
 
 
@@ -65,13 +63,14 @@ def api_awards(request):
             serializer = AwardSerializer(results, many=True)
             return Response(serializer.data)
 
-class MyModelDetailAPIView(generics.RetrieveAPIView):
+
+class AwardsDetailAPIView(generics.RetrieveAPIView):
     queryset = Award.objects.all()
     serializer_class = AwardSerializer
 
     def get_object(self):
         queryset = self.get_queryset()
-        obj = queryset.filter(pk=self.request.query_params.get('id')).first()
+        obj = queryset.get(pk=self.request.query_params.get('id'))
         return obj
 
 

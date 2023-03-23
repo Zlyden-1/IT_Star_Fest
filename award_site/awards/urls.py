@@ -13,6 +13,7 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('awards/<int:pk>/', views.AwardVew.as_view()),
     path('awards/search/', views.search, name='search'),
+    path('api/award/', views.AwardsDetailAPIView.as_view()),
     path('api/awards/', views.api_awards),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
