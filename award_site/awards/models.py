@@ -13,7 +13,7 @@ class Award(models.Model):
                              verbose_name='Заявка на получение награды')
     rank = models.IntegerField(null=True, blank=True, verbose_name='Степень ордена')
     necessary_docs = models.FileField(null=True, blank=True, upload_to='docs',
-                                      default=None, verbose_name='Заявка на получение награды')
+                                      default=None, verbose_name='Необходимые документы')
 
     def __str__(self):
         if self.rank is None:

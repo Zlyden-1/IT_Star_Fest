@@ -6,8 +6,7 @@ from django.views import generic
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import viewsets
-from rest_framework import permissions
-
+from rest_framework import permissions, generics
 
 import re
 
@@ -66,8 +65,13 @@ def api_awards(request):
             serializer = AwardSerializer(results, many=True)
             return Response(serializer.data)
 
-class AwardViewSet(viewsets.ModelViewSet):
-    serializer_class = AwardSerializer
+class MyModelDetailAPIView(generics.RetrieveAPIView):
     queryset = Award.objects.all()
+    serializer_class = AwardSerializer
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = queryset.filter(pk=self.request.query_params.get('id')).first()
+        return obj
 
 
