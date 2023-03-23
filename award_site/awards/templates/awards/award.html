@@ -6,30 +6,45 @@
     <link rel="stylesheet" type="text/css" href="{% static '/awards/detail_style.css' %}">
 </head>
 <body>
-    <div class="e12_263">
-                <span class="e12_264">{{ award.name }}</span><span class="e12_265">Связанные награды:</span><div class="e12_266">
-                    <div class="e12_267"></div><span class="e12_268">
-                        {{ award.name }}
-                    </span>
-                </div><div class="e12_269">
-                    <div class="e12_270"></div>
-                </div><div class="e12_272">
-                    <div class="e12_273"></div>
-                    {% for linked in linked_awards %}
-                    <span class="e12_274">
+<div class="e12_263">
+    <span class="e12_264">{{ award }}</span><span class="e12_265">Связанные награды:</span>
+    {% for linked in linked_awards %}
+    <div class="e12_266">
+        <div class="e12_267"></div>
+        <span class="e12_268">
                         {{ linked }}
-                    </span>
-                    {% endfor %}
-                </div><div class="e12_275"></div><div class="e12_276"><span class="e12_277">Главная</span><span class="e12_278">Контакты</span><span class="e12_279">Награды</span></div><div class="e12_280"></div><div class="e12_281"><span class="e12_282">Войти</span></div><div class="e12_294"><span class="e12_295">Перечень необходимых документов</span></div><div class="e12_298"><span class="e12_299">Заявление</span></div><div class="e12_287"><span class="e12_288">Регистрация</span></div><div class="e12_289"></div><div class="e12_293">
+        </span>
+    </div>
+    {% endfor %}
+    <div class="e12_269">
+        <div class="e12_270"></div>
+    </div>
+    {% for linked in linked_awards %}
+    <div class="e12_272">
+        <div class="e12_273"></div>
+        <span class="e12_274"></span>
+    </div>
+    {% endfor %}
+    <div class="e12_275"></div>
+    <div class="e12_276"><span class="e12_277">Главная</span><span class="e12_278">Контакты</span><span class="e12_279">Награды</span>
+    </div>
+    <div class="e12_280"></div>
+    <div class="e12_281"><span class="e12_282">Войти</span></div>
+    <div class="e12_294"><span class="e12_295">Перечень необходимых документов</span></div>
+    <div class="e12_298"><span class="e12_299">Заявление</span></div>
+    <div class="e12_287"><span class="e12_288">Регистрация</span></div>
+    <div class="e12_289"></div>
+    <div class="e12_293">
                     <span class="e12_290">
-                        {{ award.conditions }}
-                    </span><span class="e12_284">Описание награды</span>
-                </div><div class="e12_292">
-                    <span class="e12_291">
                         {{ award.description }}
+                    </span><span class="e12_284">Описание награды</span>
+    </div>
+    <div class="e12_292">
+                    <span class="e12_291">
+                        {{ award.conditions }}
                         <a href="/">Home</a>
                     </span><span class="e12_286">Условия получения</span>
-                </div>
-            </div>
+    </div>
+</div>
 </body>
 </html>
